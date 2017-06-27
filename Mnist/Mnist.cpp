@@ -141,7 +141,7 @@ int main()
 		auto_ptr<Network>	network1(new ThreeLayerNeuralNetwork());
 		network1->setup();
 		network1->forward(100); // mini batch size is 100
-#elif
+#else
 		// Test code
 		testConstructor();
 		testDot();

@@ -100,7 +100,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions); _ONETHREAD</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,13 +142,17 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="AMPMatrix.cpp" />
+    <ClCompile Include="OneThreadMatrix.cpp" />
     <ClCompile Include="Mnist.cpp" />
     <ClCompile Include="Network.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AMPMatrix.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="OneThreadMatrix.h" />
     <ClInclude Include="Network.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

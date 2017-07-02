@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "Matrix.h"
+#include "OneThreadMatrix.h"
 #include "Network.h"
 
 
@@ -127,7 +127,7 @@ void ThreeLayerNeuralNetwork::loadMNISTData()
 		ifs.close();
 
 		// resize the matrix of input layer x
-		_t.setup(_numOfItems, 10, 0.0);
+		_t.setup(_numOfItems, 10);
 		for (size_t i = 0; i < _numOfItems; ++i)
 		{
 
@@ -231,28 +231,28 @@ void ThreeLayerNeuralNetwork::forward(size_t batchSize)
 //
 // Forward Propagation
 //  return value is y which is matrix calculated by this neural network
-Matrix ThreeLayerNeuralNetwork::forwardMiniBatch(const Matrix & subX, bool bSoftmax)
+OneThreadMatrix ThreeLayerNeuralNetwork::forwardMiniBatch(const OneThreadMatrix & subX, bool bSoftmax)
 {
-	Matrix y;
+	OneThreadMatrix y;
 
 	{
 		// Ignore batch size, try toi all data
 		//   MninstImageSize is 28 x 28 = 784
 
 		// a1's shape is (miniBatchSize, 50)
-		Matrix a1 = Matrix::dot(subX, _w1);
-		Matrix::sigmoid(a1);
+		OneThreadMatrix a1 = OneThreadMatrix::dot(subX, _w1);
+		OneThreadMatrix::sigmoid(a1);
 
 		// a2's shape is (miniBatchSize, 100)
-		Matrix a2 = Matrix::dot(a1, _w2);
-		Matrix::sigmoid(a2);
+		OneThreadMatrix a2 = OneThreadMatrix::dot(a1, _w2);
+		OneThreadMatrix::sigmoid(a2);
 
 		// a3 and y's shape is (miniBatchSize, 100)
-		Matrix a3 = Matrix::dot(a2, _w3);
+		OneThreadMatrix a3 = OneThreadMatrix::dot(a2, _w3);
 
 		if (bSoftmax)
 		{
-			y = Matrix::softmax(a3);
+			y = OneThreadMatrix::softmax(a3);
 		}
 		else
 		{

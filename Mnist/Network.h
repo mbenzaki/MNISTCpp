@@ -6,14 +6,14 @@
 #include <string>
 #include <vector>
 
-#include "Matrix.h"
+#include "OneThreadMatrix.h"
 
 class Network
 {
 
 protected:
-	Matrix	_x;		// Input Layer Matrix (_numItems x (MnistImageSize))
-	Matrix	_y;		// Estimated Output Layer 
+	OneThreadMatrix	_x;		// Input Layer Matrix (_numItems x (MnistImageSize))
+	OneThreadMatrix	_y;		// Estimated Output Layer 
 
 public:
 
@@ -62,11 +62,11 @@ protected:
 	static const size_t	MninstImageSize = (28 * 28);
 
 	size_t _numOfItems;	// Total number of Supervised data
-	Matrix _t;	// Supervised data from MNIST
+	OneThreadMatrix _t;	// Supervised data from MNIST
 
-	Matrix _w1;	// Weight from input layer to hidden layer(a1)		shape(28x28, 50)
-	Matrix _w2;	// Weight from hidden layer(a1) to hidden layer(a2) shape(50,100)
-	Matrix _w3;	// Weight from hidden layer(a2) output layer		shape(100,10)
+	OneThreadMatrix _w1;	// Weight from input layer to hidden layer(a1)		shape(28x28, 50)
+	OneThreadMatrix _w2;	// Weight from hidden layer(a1) to hidden layer(a2) shape(50,100)
+	OneThreadMatrix _w3;	// Weight from hidden layer(a2) output layer		shape(100,10)
 
 	size_t	_numOfTotalCalculated;
 	size_t	_numOfaccuracy;
@@ -74,7 +74,7 @@ protected:
 
 	static int32_t readInt32(istream & is);
 	void loadMNISTData();
-	virtual Matrix forwardMiniBatch(const Matrix & subX, bool bSoftmax = false);
+	virtual OneThreadMatrix forwardMiniBatch(const OneThreadMatrix & subX, bool bSoftmax = false);
 
 
 public :
